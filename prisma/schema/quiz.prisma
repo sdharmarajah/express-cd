@@ -1,0 +1,46 @@
+model Question {
+  id                               Int    @id @default(autoincrement()) @map("ID")
+  answer_index                     String @map("Answer Index")
+  area                             String @map("Area")
+  image_in_question                Boolean @default(false)
+  image_in_answers                 Boolean @default(false)
+  question_image_description       String @map("Q Image description")
+  question                         String @map("English translation of question")
+  question_si                      String? @map("Sinhala translation of question") 
+  question_ta                      String? @map("Tamil translation of question") 
+  answer_1                         String? @map("English Translation of Answer 1")
+  answer_1_si                      String? @map("Sinhala Translation of Answer 1") 
+  answer_1_ta                      String? @map("Tamil Translation of Answer 1") 
+  answer_2                         String? @map("English Translation of Answer 2")
+  answer_2_si                      String? @map("Sinhala Translation of Answer 2") 
+  answer_2_ta                      String? @map("Tamil Translation of Answer 2") 
+  answer_3                         String? @map("English Translation of Answer 3")
+  answer_3_si                      String? @map("Sinhala Translation of Answer 3") 
+  answer_3_ta                      String? @map("Tamil Translation of Answer 3") 
+  description_answer_image_1       String? @map("Description of Answer Image 1")
+  description_answer_image_2       String? @map("Description of Answer Image 2")
+  description_answer_image_3       String? @map("Description of Answer Image 3")
+  v_text                           String @map("V Text")
+  v_text_si                        String? @map("V Text Si") 
+  v_text_ta                        String? @map("V Text Ta") 
+  v_image_steps                    String? @map("V Image Steps")
+  a_text                           String @map("A Text")
+  a_text_si                        String? @map("A Text Si") 
+  a_text_ta                        String? @map("A Text Ta") 
+  k_text                           String @map("K Text")
+  k_text_si                        String? @map("K Text Si") 
+  k_text_ta                        String? @map("K Text Ta") 
+  quiz_id                          Int?  
+  status                           String @default("INCOMPLETE")
+  rejected                         Boolean @default(false)
+  quiz                             Quiz?  @relation(fields: [quiz_id], references: [id])  
+
+  @@map("questions")
+}
+
+
+model Quiz {
+  id        Int        @id @default(autoincrement())
+  title     String
+  questions Question[]
+}

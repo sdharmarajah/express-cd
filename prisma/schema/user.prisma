@@ -1,0 +1,17 @@
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  password String
+  role     String
+  Token    Token[]
+}
+
+model Token {
+  id          Int      @id @default(autoincrement())
+  token       String
+  blacklisted Boolean
+  expires     DateTime
+  userId      Int
+  User        User     @relation(fields: [userId], references: [id])
+}
